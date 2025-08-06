@@ -3,9 +3,10 @@ import java.util.Scanner;
 class BankManagementSystem {
 public static void main(String[] args) {
     BankManagementSystem b = new BankManagementSystem();
-    b.run();
+    system.run();
 }
     public void run(){
+        BankAccount ba = new BankAccount(null, null, null,0);
     Scanner sc = new Scanner(System.in);
      int choice = 0;
     do{
@@ -21,28 +22,28 @@ public static void main(String[] args) {
         switch (choice) 
         {
             case 1:
-                 
+                ba.createAccount();
                 break;
             case 2:
-             
+                ba.displayAccountDetails();
                 break;
             case 3:
-             
+                ba.depositeAmount();
                 break;
             case 4:
-                
+                ba.withdrawAmount();
                 break;
             case 5:
-                
+                ba.applyInterest();
                 break;
             case 6:
-                
+                ba.displayLoanDetails();
                 break;
             case 7:
-                
+                ba.makeLoanPayment();
                 break;
             case 8:
-               
+                System.out.println("Thank you for using the Bank Management System.");
                 break;
             default:
                 break;

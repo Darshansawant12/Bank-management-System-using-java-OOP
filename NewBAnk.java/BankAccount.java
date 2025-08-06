@@ -1,13 +1,14 @@
 import java.util.Scanner;
 
 class BankAccount{
+     List<BankAccount> accounts= new ArrayList<>();
     private int AccountNumber;
     private String type;
     private String holdername;
     private double balance;
 
-    BankAccount(int accountNumber, String type, String holdername, double balance) {
-        this.AccountNumber = accountNumber;
+    BankAccount(int AccountNumber, String type, String holdername, double balance) {
+        this.AccountNumber = AccountNumber;
         this.type = type;
         this.holdername = holdername;
         this.balance = balance;
@@ -52,7 +53,7 @@ class BankAccount{
         Scanner sc = new Scanner(System.in);
         System.out.println("Creating New Account");
         System.out.println("Enter Account Number:");
-        accountNumber = sc.nextInt();
+        AccountNumber = sc.nextInt();
         System.out.println("Enter account type(Saving/Current/loan):");
         type = sc.next();
         System.out.println("Enter Account Holder Name:");
@@ -61,14 +62,14 @@ class BankAccount{
         balance = sc.nextDouble();
         System.out.println("Account Created Successfully");
         BankAccount newAccount;
-        if(Type.equalsignorecase("saving")){
+        if(type.equalsIgnoreCase("saving")){
             System.out.println("Enter interest rate in percentage:");
             double interestRate = sc.nextDouble();
             interestRate = interestRate / 100;// Convert percentage to decimal
-            newAccount = new SavingAccount(accountNumber, type, holdername, balance, interestRate);
+            newAccount = new SavingAccount(AccountNumber, type, holdername, balance, interestRate);
         }
         else if(type.equalsIgnoreCase("Current")){
-            newAccount = new CurrentAccount(accountNumber,holdername,balance);
+            newAccount = new CurrentAccount(AccountNumber,holdername,balance);
         }
         else if(type.equalsIgnoreCase("Loan")){
             System.out.println("Enter loan Amount:");
@@ -78,9 +79,23 @@ class BankAccount{
             System.out.println("Enter loan term in years:");
             int loanterm = sc.nextInt();
             interestRate = interestRate / 100;// Convert percentage to decimal
-            newAccount = new LoanAccount(accountNumber, type, holdername, balance, loanAmount, interestRate);
+            newAccount = new LoanAccount(AccountNumber, type, holdername, balance, loanAmount, interestRate);
+        }
+        else{
+            System.out.println("Invalid account type. Please enter either 'Saving','Current', or 'Loan.'");
         }
 
+        accounts.add(newAccount);
+        System.out.println("Account Created Successfully:"+ newAccount);
+
+    }
+    class CurrentAccount extends BankAccount{
+        private double over draftLimit;
+
+        public CurrentAccount(int AccountNumber, String holdername, double balance) {
+            super(AccountNumber, "Current", holdername, balance);
+            
+        }
     }
 }
     
