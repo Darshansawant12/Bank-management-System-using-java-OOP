@@ -3,7 +3,8 @@ import java.util.Scanner;
 class BankManagementSystem {
 public static void main(String[] args) {
     BankManagementSystem b = new BankManagementSystem();
-    system.run();
+    
+    b.run();
 }
     public void run(){
         BankAccount ba = new BankAccount(null, null, null,0);
@@ -25,22 +26,22 @@ public static void main(String[] args) {
                 ba.createAccount();
                 break;
             case 2:
-                ba.displayAccountDetails();
+                ba.displayAccounts();
                 break;
             case 3:
-                ba.depositeAmount();
+                ba.deposite();
                 break;
             case 4:
-                ba.withdrawAmount();
+                ba.withdraw();
                 break;
             case 5:
                 ba.applyInterest();
                 break;
             case 6:
-                ba.displayLoanDetails();
+                // ba.displayLoanDetails();
                 break;
             case 7:
-                ba.makeLoanPayment();
+                // ba.makeLoanPayment();
                 break;
             case 8:
                 System.out.println("Thank you for using the Bank Management System.");
