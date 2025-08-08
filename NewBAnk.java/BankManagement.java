@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import javax.swing.plaf.synth.SynthToolTipUI;
+
 class BankManagementSystem {
 public static void main(String[] args) {
     BankManagementSystem b = new BankManagementSystem();
@@ -7,10 +9,12 @@ public static void main(String[] args) {
     b.run();
 }
     public void run(){
-        BankAccount ba = new BankAccount(null, null, null,0);
+        BankAccount ba = new BankAccount(0, null, null,0);
     Scanner sc = new Scanner(System.in);
+     
      int choice = 0;
     do{
+        
         System.out.println("1.create Account");
         System.out.println("2.display account details");
         System.out.println("3.Deposite amount");
@@ -19,6 +23,7 @@ public static void main(String[] args) {
         System.out.println("6.display loan account details");
         System.out.println("7.Make loan Payment");
         System.out.println("8.Exit");
+        System.out.println("Enter yout Choice:");
          choice = sc.nextInt();
         switch (choice) 
         {
@@ -38,10 +43,10 @@ public static void main(String[] args) {
                 ba.applyInterest();
                 break;
             case 6:
-                // ba.displayLoanDetails();
+                 ba.displayLoanDetails();
                 break;
             case 7:
-                // ba.makeLoanPayment();
+                 ba.makeLoanPayment();
                 break;
             case 8:
                 System.out.println("Thank you for using the Bank Management System.");

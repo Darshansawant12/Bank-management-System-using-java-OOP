@@ -81,9 +81,11 @@ class BankAccount{
             int loanterm = sc.nextInt();
             interestRate = interestRate / 100;// Convert percentage to decimal
             newAccount = new LoanAccount(AccountNumber, holdername, loanAmount, interestRate, loanterm);
+            
         }
         else{
             System.out.println("Invalid account type. Please enter either 'Saving','Current', or 'Loan.'");
+            return;
         }
 
         accounts.add( newAccount );
@@ -91,16 +93,16 @@ class BankAccount{
 
     }
     class CurrentAccount extends BankAccount{
-        private double overdraftLimit;
+        // private double overdraftLimit;
 
         public CurrentAccount(int AccountNumber, String holdername, double balance) {
             super(AccountNumber, "Current", holdername, balance);
             
         }
     }
-    private BankAccount findaccount(String AccountNumber){
+    private BankAccount findaccount(int AccountNumber){
         for (BankAccount account : accounts){
-            if (account.getAccountNumber().equals(accountNumber)){
+            if (account.getAccountNumber()==(AccountNumber)){
                 return account;
             }
         }
@@ -111,7 +113,7 @@ class BankAccount{
         Scanner sc = new Scanner(System.in);
         System.out.println("Display account details");
         System.out.println("Enter account number:");
-        String accountnumber = sc.next();
+        int accountnumber = sc.nextInt();
         BankAccount account = findaccount (accountnumber);
 
         if(account != null)
@@ -135,7 +137,7 @@ class BankAccount{
         Scanner sc = new Scanner(System.in);
         System.out.println("Deposite amount");
         System.out.println("Enter account number:");
-        String accountNumber = sc.next();
+        int accountNumber = sc.nextInt();
         System.out.println("Enter deposite Amount:");
         double amount = sc.nextDouble();
          
@@ -157,7 +159,7 @@ class BankAccount{
         Scanner sc = new Scanner(System.in);
         System.out.println("Withdraw amount");
         System.out.println("Enter account number:");
-        String accountNumber = sc.next();
+        int accountNumber = sc.nextInt();
         System.out.println("Enter withdraw amount:");
         double amount = sc. nextDouble();
 
@@ -184,7 +186,7 @@ class BankAccount{
         Scanner sc= new Scanner(System.in);
         System.out.println("Apply interest ");
         System.out.println("Enter account number:");
-        String accountNumber = sc.next();
+        int accountNumber = sc.nextInt();
         System.out.println("Enter the month to apply interest for:");
         int months = sc. nextInt();
 
@@ -197,15 +199,36 @@ class BankAccount{
         }
     }
 
-    // public void displayLoanDetails(){
-    //     Scanner sc = new Scanner(System.in);
-    //     System.out.println("Display Loan account details");
-    //     System.out.println("Enter Account number:");
-    //     String accountNumber = sc.next();
-    //     BankAccount account =  findaccount(accountNumber);
-    //     if(account instanceof LoanAccount){
-    //         ()
-    //     }
+    public void displayLoanDetails(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Display Loan account details");
+        System.out.println("Enter Account number:");
+        int accountNumber = sc.nextInt();
+        BankAccount account =  findaccount(accountNumber);
+        if(account instanceof LoanAccount){
+           ((LoanAccount)account).displayLoanDetails(); 
+        }
+        else{
+            System.out.println("Account not found or not a loan account.");
+        }
     }
 
-    
+    public void makeLoanPayment(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Loan Account details");
+        System.out.println("Enter account Number:");
+        int accountNumber = sc.nextInt();
+         
+        BankAccount account = findaccount( accountNumber);
+        if(account instanceof LoanAccount){
+            System.out.println("Enter payment Amount:");
+            double paymentAmount = sc.nextDouble();
+            ((LoanAccount)account).makepayment(paymentAmount);
+        }
+        else{
+            System.out.println("Account not found or not a loan account.");
+        }
+
+    }
+
+} 
